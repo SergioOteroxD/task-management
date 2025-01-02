@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  app:
+    build:
+      context: .
+    container_name: nestjs_app
+    ports:
+      - '${PORT}:3000' # Puerto definido en el archivo .env
+    env_file:
+      - .env # Carga las variables de entorno
+    depends_on:
+      - mongo
+      # - postgres
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  mongo:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+  # postgres_data:
