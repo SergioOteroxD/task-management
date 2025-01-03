@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IjwtDriver } from '../../../../drivers/jwt/jwt.driver';
+import { IjwtDriver } from '../../../drivers/jwt.driver';
 import { IjwtUC } from '../jwt.uc';
 
 @Injectable()

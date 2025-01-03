@@ -2,8 +2,11 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { IjwtDriver } from './jwt/jwt.driver';
-import { JwtDriver } from './jwt/impl/jwt.driver.impl';
+import { IjwtDriver } from './jwt.driver';
+import { JwtDriver } from './impl/jwt.driver.impl';
+import { Task, TaskSchema } from './model/task.model';
+import { ItaskDriver } from './task.driver';
+import { TaskDriver } from './impl/task.driver.impl';
 
 @Module({
   imports: [
@@ -23,13 +26,17 @@ import { JwtDriver } from './jwt/impl/jwt.driver.impl';
         uri: config.get<string>('database.mongo_uri'),
       }),
     }),
-    MongooseModule.forFeature([]),
+    MongooseModule.forFeature([{ name: Task.name, schema: TaskSchema }]),
   ],
   providers: [
+    // Task
+    { provide: ItaskDriver, useClass: TaskDriver },
     //Jwt
     { provide: IjwtDriver, useClass: JwtDriver },
   ],
   exports: [
+    // Task
+    ItaskDriver,
     // JWT
     IjwtDriver,
   ],

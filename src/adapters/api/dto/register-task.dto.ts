@@ -13,7 +13,7 @@ export class RegisterTaskDto {
 
   @ApiProperty()
   @IsDateString()
-  dueDate: string;
+  dueDate: Date;
 
   @ApiProperty({ enum: EstatusTask })
   @IsEnum(EstatusTask)

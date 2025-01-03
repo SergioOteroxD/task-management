@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from '../decorators/is-public.jwt.decorator';
-import { IjwtUC } from '../../core/jwt/use_case/jwt.uc';
+import { IjwtUC } from '../../core/use_case/jwt.uc';
 import { GeneralUtils } from '../../commons/utils/general.util';
 
 @Injectable()
